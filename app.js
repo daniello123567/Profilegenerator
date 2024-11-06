@@ -5,16 +5,19 @@ const app = express();
 const whitelist = ['https://portgen-frontend.vercel.app'];
 const corsOptions = {
   origin:(origin,callback)=>{
-    if(whitelist.indexOf(origin)!==-1||!origin){
+    if(whitelist.includes(origin)||!origin){
       callback(null,true)
     }else{
       callback(new Error('CORS NOT ALLOWED'))
     }
   },
-  credentials:true,
-  optionsSuccessStatus:200
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 200
 }
-app.use(cors(corsOptions));
+app.options('*',cors(corsOptions));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use('/Template',TemplateRoute);
