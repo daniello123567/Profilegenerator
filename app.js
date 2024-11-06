@@ -2,8 +2,18 @@ import express from 'express'
 import TemplateRoute from './routes/Template.js';
 import cors from 'cors'
 const app = express();
-app.use(cors({origin:['https://portgen-frontend.vercel.app/','http://localhost:3000'],methods:["GET","POST","DELETE","PUT","OPTIONS"],allowedHeaders:['Content-Type', 'Authorization']}));
-
+const whitelist = ['https://portgen-frontend.vercel.app/','http://localhost:3000']
+const corsOption = {
+  origin:(origin,callback)=>{
+    if(whitelist.indexOf(origin)!==1){
+      callback(null,true)
+    }else{
+      callback(new Error('sth went wrong'))
+    }
+  },
+  optionsSucessStatus:200
+}
+app.use(cors(corsOption));
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 app.use('/Template',TemplateRoute);
