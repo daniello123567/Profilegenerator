@@ -2,7 +2,7 @@ import express from 'express'
 import TemplateRoute from './routes/Template.js';
 import cors from 'cors'
 const app = express();
-const whitelist = ['https://portgen-frontend.vercel.app'];
+const whitelist = ['https://portgen-frontend.vercel.app','http://localhost:3000'];
 const corsOptions = {
   origin:(origin,callback)=>{
     if(whitelist.includes(origin)||!origin){
