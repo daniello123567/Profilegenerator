@@ -8,7 +8,7 @@ const corsOptions = {
     if(whitelist.includes(origin)||!origin){
       callback(null,true)
     }else{
-      callback(new Error('CORS NOT ALLOWED'))
+      callback(new Error('CORS NOT ALLOWED'));
     }
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
