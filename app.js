@@ -5,7 +5,7 @@ const app = express();
 const whitelist = ['https://portgen-frontend.vercel.app','http://localhost:3000']
 const corsOption = {
   origin:(origin,callback)=>{
-    if(whitelist.indexOf(origin)!==1){
+    if(whitelist.indexOf(origin)!==-1||!origin){
       callback(null,true)
     }else{
       callback(new Error('sth went wrong'))
