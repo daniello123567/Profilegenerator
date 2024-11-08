@@ -1,6 +1,8 @@
 import express from 'express'
 import TemplateRoute from './routes/Template.js';
 import cors from 'cors'
+import env from 'dotenv'
+env.config()
 const app = express();
 const whitelist = ['https://portgen-frontend.vercel.app','http://localhost:3000'];
 const corsOptions = {
@@ -23,6 +25,7 @@ app.use('/Template',TemplateRoute);
 app.get('/',(req,res)=>{
   res.send('working..')
 })
-app.listen(3009, ()=>{
+const port = process.env.PORT || 3009
+app.listen(port, ()=>{
   console.log('port don start');
 });

@@ -38,6 +38,7 @@ TemplateRoute.route('/')
   console.error(error)
   }
 }
+res.json({message:"working on it"});
 let projectid = await Deploy();
 const CheckRedyState = async()=>{
   const response = await fetch(`https://api.vercel.com/v13/projects/${projectid}`,{
@@ -59,6 +60,7 @@ const ResolveWhenReadyState = async ()=>{
         res.json({yournewurl:aliase,status:'ok'})
       }else{
         console.log(await readyState);
+        res.json({message:"still building..."})
       }
     },2000);
 
