@@ -14,6 +14,7 @@ TemplateRoute.route('/')
     const aliase = await NameCanBeAlias(processedName);
 
     const Deploy = async ()=>{
+      try {
     const response = await fetch("https://api.vercel.com/v13/deployments",{
     method:"POST",
     headers:{
@@ -33,6 +34,9 @@ TemplateRoute.route('/')
    const data = await response.json();
 
    return data.project.id
+  } catch (error) {
+  console.error(error)
+  }
 }
 let projectid = await Deploy();
 const CheckRedyState = async()=>{
